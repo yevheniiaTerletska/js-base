@@ -50,8 +50,8 @@ function arraySum(arr){
 }
 arraySum(arr);
 
-//5. .Дан объект Напишите код для суммирования всех зарплат и сохраните результат в переменной sum.
-
+// 5. .Дан объект Напишите код для суммирования всех зарплат и сохраните результат в переменной sum.
+// 5.1
 var salaries = {
   John: 100,
   Ann: 160,
@@ -62,12 +62,23 @@ var prop;
 for (prop in salaries){
   sum +=salaries[prop];
 }
+console.log(sum);
+// 5.2
+// var salaries = {
+//   John: 100,
+//   Ann: 160,
+//   Pete: 130
+// };
+// var salariesValues = Object.values(salaries);
+// var sum = 0;
+// var newArray;
+// newArray = salariesValues.forEach(function (currentValue) {
+//   sum+= currentValue;
+//
+// });
 // console.log(sum);
 
-var salary = 'salary';
-console.log(salary.length);
-
-
+//**********************************************************************************************************************
 //HOMEWORK 2
 
 //1. Требуется написать функцию, выводящую в консоль числа от 1 до n, где n — это целое число, которая функция принимает в качестве параметра, с такими условиями:
@@ -181,14 +192,7 @@ function swowSimpleNumbers() {
 }
 // swowSimpleNumbers();
 
-//TO DO
-// var a = 2;
-// function fn() {
-//   console.log(a);
-//   var  b = 3;
-//   console.log(b);
-// }
-// // fn();
+//********************************************************************
 
 // var object = {
 //   name: "me",
@@ -221,3 +225,16 @@ function swowSimpleNumbers() {
 
 
 
+//  HOISTING
+//1. Ініціалізація
+// lexical envirement = { fn: say, a: undefined} - функція читається, змінна undefined (var i = 3 - теж undefined) читається (піднімається) тільки var i
+// 2. Присвоєння
+// lexical envirement = {fn: say, a: 2}
+var a = 2;
+function fn() {
+  // console.log(a); // інтерпретатор спочатку переглядає лексичне оточення всередині функції - якщо в ній є значення var a - він його бачить і тоді undefined; якщо немає - він дивиться назовні (глобальні змінні і присвоює їх)
+  var b = 3;
+  // console.log(b)
+
+}
+fn();
