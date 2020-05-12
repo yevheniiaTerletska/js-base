@@ -52,18 +52,19 @@ arraySum(arr);
 
 // 5. .Дан объект Напишите код для суммирования всех зарплат и сохраните результат в переменной sum.
 // 5.1
-var salaries = {
-  John: 100,
-  Ann: 160,
-  Pete: 130
-};
-var sum = 0;
-var prop;
-for (prop in salaries){
-  sum +=salaries[prop];
-}
-console.log(sum);
-// 5.2
+// var salaries = {
+//   John: 100,
+//   Ann: 160,
+//   Pete: 130
+// };
+// var sum = 0;
+// var prop;
+// for (prop in salaries){
+//   sum +=salaries[prop];
+// }
+// console.log(sum);
+
+//5.2
 // var salaries = {
 //   John: 100,
 //   Ann: 160,
@@ -74,6 +75,21 @@ console.log(sum);
 // var newArray;
 // newArray = salariesValues.forEach(function (currentValue) {
 //   sum+= currentValue;
+//
+// });
+// console.log(sum);
+
+// 5.3
+// var salaries = {
+//   John: 100,
+//   Ann: 160,
+//   Pete: 130
+// };
+// var salariesValues = Object.values(salaries);
+// var sum = 0;
+// var newArray;
+// newArray = salariesValues.map(function (currentValue) {
+//   return sum+= currentValue;
 //
 // });
 // console.log(sum);
