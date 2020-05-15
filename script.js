@@ -1,3 +1,124 @@
+//HOMEWORK 4
+
+//1. 1. Дан массив [1, 2, [3, 4, [5, 6]]];
+// Напишите функцию, которая будет рекурсивно выравнивать массив, где результатом будет [1, 2, 3, 4, 5, 6].
+// Также найдите метод массива, который уже это делает и разберитесь самостоятельно как это работает.
+
+//1. створити новий масив 2. перебрати масив - якщо ел - масив - взяти перший ел і додати в новий масив. якщо ел не масив - додати його в новий масив
+
+function alignArr(arr) {
+  var newArr = [];
+  function helperFunction(helperArr) {
+    if (helperArr.length === 0) {
+      return;
+    }
+    var firstArrVal = helperArr.shift();
+    var isAnArray = Array.isArray(firstArrVal);
+    if (isAnArray) {
+      return helperFunction(firstArrVal);
+    }
+    else {
+      newArr.push(firstArrVal);
+      return helperFunction(helperArr);
+    }
+  }
+  helperFunction(arr);
+  return newArr;
+}
+console.log(alignArr([1, 2, [3, 4, [5, 6]]]));
+
+//2. . Дан массив [1, 2, 3, 4, 5, 6]. Найдите сумму чисел рекурсивно.
+//
+var numbers = [1, 2, 3, 4, 5, 6];
+var sum = 0;
+function getSum() {
+  sum += numbers.pop();
+  if ( numbers.length != 0) {
+    sum = getSum();
+  }
+  return sum;
+}
+// console.log(getSum());
+
+//3. Basic Algorithm Scripting: Factorialize a Number
+var i = 0;
+var sum = 1;
+function factorialize(num) {
+  sum *= i+=1;
+  if (num === 0){
+    return 1
+  } else if (i < num) {
+  factorialize(num);
+  }
+  return sum;
+}
+// console.log(factorialize(10));
+
+function factorialize(num){
+  if (num === 0) {
+    return 1;
+  }
+    else {
+      return num * factorialize(num - 1);
+    }
+    return num;
+}
+factorialize(5);
+
+//4. Basic Algorithm Scripting: Find the Longest Word in a String
+
+function findLongestWordLength(str) {
+    str = str.split(' ');
+    str.sort(function (a, b) {
+      return b.length - a.length;
+    });
+    str.length = str.shift().length;
+
+  return str.length;
+}
+// findLongestWordLength("The quick brown fox jumped over the lazy dog");
+
+//5. Basic Algorithm Scripting: Return Largest Numbers in Arrays
+
+function largestOfFour(arr) {
+  function largestOfOne(arr) {
+    arr.sort(function (a, b) {
+      return b - a;
+    });
+    arr = arr.shift();
+    return arr;
+  };
+  arr = arr.map(largestOfOne);
+  console.log(arr);
+  return arr;
+}
+// largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
+
+//6. Basic Algorithm Scripting: Confirm the Ending
+
+function confirmEnding(str, target) {
+  str = str.slice(-target.length);
+  if (str === target){
+    str = true;
+  }
+  else {
+    str = false
+  }
+  return str;
+}
+
+confirmEnding("Bastian", "n");
+
+
+//Функция haveFun принимает 2 параметра: анонимную функцию, которая возвращает 3 и анонимную функцию, которая возвращает 4.
+// Верните результатом функции haveFun сумму 3 и 4.
+
+function haveFun(a, b) {
+  return a + b;
+}
+console.log(haveFun((function () {return 3;})(), (function () {return 4;})()));
+
+
 //HOMEWORK 3
 
 // 1. Basic Algorithm Scripting: Convert Celsius to FahrenheitPassed
@@ -254,3 +375,8 @@ function fn() {
 
 }
 fn();
+
+var x = 3;
+var y = 8;
+var result = x++ % y--;
+// console.log(result);
