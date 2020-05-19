@@ -1,31 +1,181 @@
+//Homework 5
+
+//find the longest word (string)
+
+function findLongestWordLength(str) {
+  var i;
+  var counter = 0;
+  var LongestWordLength = 0;
+  for (i = 0; i < str.length; i+=1){
+  if (str[i] !== ' '){
+    counter +=1;
+  } else {
+    if (LongestWordLength < counter){
+      LongestWordLength = counter;
+    }
+      counter = 0
+  }
+  }
+  return LongestWordLength;
+}
+// console.log(findLongestWordLength("The quick brown fox jumped over tkkkkkkhe lazy d"));
+
+//1. Basic Algorithm Scripting: Truncate a StringPassed
+function truncateString(str, num) {
+  if (num >= str.length){
+    return str;
+  }
+    return str.substring(0, num) + '...';
+}
+// console.log(truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length));
+
+//2. Basic Algorithm Scripting: Finders Keepers
+function findElement(arr, func) {
+  return arr.find(func);
+}
+// console.log(findElement([1, 3, 5, 8, 9, 10], function(num) { return num % 2 === 0; }));
+
+
+//3. Basic Algorithm Scripting: Boo who
+//Check if a value is classified as a boolean primitive.
+// Return true or false.
+
+function booWho(bool) {
+    return typeof bool === 'boolean';
+}
+booWho(3);
+
+//4. Basic Algorithm Scripting: Title Case a Sentence
+//Return the provided string with the first letter of each word capitalized.
+// Make sure the rest of the word is in lower case.
+function titleCase(str) {
+  var arr = str.toLowerCase().split(' ');
+  var  newArr = arr.map(function(value) {
+    return value[0].toUpperCase() + value.substring(1, value.length);
+  });
+  return newArr.join(' ');
+  }
+
+titleCase("sHoRt AnD sToUt");
+
+
+//**********************************************************************************************************************
+//1.  поліфіл для bind
+// function fn(x) {
+//   console.log(this.a, x)
+// }
+// function bind(handler, context, args) {
+//   return function () {
+//     return handler.call(context, args);
+//   }
+// }
+// bind(fn, obj, 'text');
+
+
+
+
+
+//4. function constructor
+function Example(name, age) { //1. this = {}
+  this.name = name; //2. this = {name: 'Bob'}
+  this.age = age; //2. this = { name: 'Bob', age: 12 }
+
+}
+var example = new Example('Bob', 12); //3. return this
+// console.log(example);
+
+// var user = {
+//   firstName: 'Vova',
+//   sayHi: function () {
+//     console.log(this.firstName);
+//
+//   }
+// }
+// var result = user.sayHi.bind(user);
+//
+// setTimeout(result, 1000);
+
+//Events
+
+
+
 //HOMEWORK 4
 
 //1. 1. Дан массив [1, 2, [3, 4, [5, 6]]];
 // Напишите функцию, которая будет рекурсивно выравнивать массив, где результатом будет [1, 2, 3, 4, 5, 6].
 // Также найдите метод массива, который уже это делает и разберитесь самостоятельно как это работает.
 
-//1. створити новий масив 2. перебрати масив - якщо ел - масив - взяти перший ел і додати в новий масив. якщо ел не масив - додати його в новий масив
+function flat(arr) {
+  return arr.reduce(function (acc, value) {
+    return acc.concat(Array.isArray(value) ? flat(value) : value)//concat = push
+  }, [])
+}
 
-function alignArr(arr) {
+var arr = [1, 2, 3, 4, 5];
+
+// для каждого элемента массива запустить функцию,
+// промежуточный результат передавать первым аргументом далее
+var result = arr.reduce(function(sum, current) {
+  return sum + current;
+}, 5);
+
+console.log( result ); // 15
+//
+function flat(arr) {
+  var arrNew = [];
+  var i;
+  arr.map(function alignArr(acc, value) {
+    for (i=0; i< arr.length; i++){
+      if (Array.isArray(arr[i])) {
+        return alignArr(acc, value);
+      }
+      else {
+        return arrNew.push(arr[value]);
+      }
+    }
+  });
+  return arrNew;
+}
+// console.log(flat([5, 8, [3, 4, [5, 6]]]));
+//
+
+function flat (arr) {
   var newArr = [];
-  function helperFunction(helperArr) {
-    if (helperArr.length === 0) {
-      return;
-    }
-    var firstArrVal = helperArr.shift();
-    var isAnArray = Array.isArray(firstArrVal);
-    if (isAnArray) {
-      return helperFunction(firstArrVal);
-    }
-    else {
-      newArr.push(firstArrVal);
-      return helperFunction(helperArr);
+  for (var i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      var value = flat(arr[i]);
+      value.forEach(function(value)
+      { newArr.push(value); })
+    } else {
+      newArr.push(arr[i]);
     }
   }
-  helperFunction(arr);
   return newArr;
 }
-console.log(alignArr([1, 2, [3, 4, [5, 6]]]));
+
+console.log( flat([[1, 2], 3, [4, [[5]]]]));
+
+
+// function alignArr(arr) {
+//   var newArr = [];
+//   function helperFunction(helperArr) {
+//     if (helperArr.length === 0) {
+//       return;
+//     }
+//     var firstArrVal = helperArr.shift();
+//     var isAnArray = Array.isArray(firstArrVal);
+//     if (isAnArray) {
+//       return helperFunction(firstArrVal);
+//     }
+//     else {
+//       newArr.push(firstArrVal);
+//       return helperFunction(helperArr);
+//     }
+//   }
+//   helperFunction(arr);
+//   return newArr;
+// }
+// flat([1, 2, [3, 4, [5, 6]]]);
 
 //2. . Дан массив [1, 2, 3, 4, 5, 6]. Найдите сумму чисел рекурсивно.
 //
@@ -41,73 +191,60 @@ function getSum() {
 // console.log(getSum());
 
 //3. Basic Algorithm Scripting: Factorialize a Number
-var i = 0;
-var sum = 1;
-function factorialize(num) {
-  sum *= i+=1;
-  if (num === 0){
-    return 1
-  } else if (i < num) {
-  factorialize(num);
-  }
-  return sum;
-}
-// console.log(factorialize(10));
 
 function factorialize(num){
   if (num === 0) {
     return 1;
-  }
-    else {
-      return num * factorialize(num - 1);
-    }
-    return num;
+  }  return num * factorialize(num - 1);
 }
 factorialize(5);
 
 //4. Basic Algorithm Scripting: Find the Longest Word in a String
 
-function findLongestWordLength(str) {
-    str = str.split(' ');
-    str.sort(function (a, b) {
-      return b.length - a.length;
-    });
-    str.length = str.shift().length;
-
-  return str.length;
-}
+// function findLongestWordLength(str) {
+  // 4.2
+  // var arr =  str.split(' ').map(function (value) {
+  //
+  // });
+  //   str = str.split(' ');
+  //   str.sort(function (a, b) {
+  //     return b.length - a.length;
+  //   });
+  //   str.length = str.shift().length;
+  //
+  // return str.length;
+// }
 // findLongestWordLength("The quick brown fox jumped over the lazy dog");
 
 //5. Basic Algorithm Scripting: Return Largest Numbers in Arrays
 
 function largestOfFour(arr) {
-  function largestOfOne(arr) {
-    arr.sort(function (a, b) {
-      return b - a;
-    });
-    arr = arr.shift();
-    return arr;
-  };
-  arr = arr.map(largestOfOne);
-  console.log(arr);
-  return arr;
+  //5.2
+  var newArr = [];
+  arr.map(function (value) {
+    newArr.push(Math.max.apply(Math, value));
+  });
+  return newArr;
+  // function largestOfOne(arr) {
+  //   arr.sort(function (a, b) {
+  //     return b - a;
+  //   });
+  //   arr = arr.shift();
+  //   return arr;
+  // };
+  // arr = arr.map(largestOfOne);
+  // console.log(arr);
+  // return arr;
 }
 // largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
 
 //6. Basic Algorithm Scripting: Confirm the Ending
 
 function confirmEnding(str, target) {
-  str = str.slice(-target.length);
-  if (str === target){
-    str = true;
-  }
-  else {
-    str = false
-  }
-  return str;
+  // 6.2 return str.substring(str.length - target.length) === target;
+  return str.slice(-target.length) === target;
 }
-
-confirmEnding("Bastian", "n");
+// console.log(confirmEnding("Bastian", "n"));
 
 
 //Функция haveFun принимает 2 параметра: анонимную функцию, которая возвращает 3 и анонимную функцию, которая возвращает 4.
@@ -116,28 +253,22 @@ confirmEnding("Bastian", "n");
 function haveFun(a, b) {
   return a + b;
 }
-console.log(haveFun((function () {return 3;})(), (function () {return 4;})()));
+// console.log(haveFun((function () {return 3;})(), (function () {return 4;})()));
 
 
 //HOMEWORK 3
 
 // 1. Basic Algorithm Scripting: Convert Celsius to FahrenheitPassed
 function convertToF(celsius) {
-  var fahrenheit;
-  fahrenheit =  (celsius * 9 / 5 + 32);
-  return fahrenheit;
+  return celsius * 9 / 5 + 32;
 }
 // convertToF(30);
 
 // 2. Reverse a String (раздел Basic Algorithm Scripting)
 function reverseString(str) {
-  var arr = str.split('');
-  var reversed = arr.reverse();
-  str = reversed.join('');
-  return str;
+  return str.split('').reverse().join('');
 }
-
-// reverseString("hello");
+// console.log(reverseString("hello"));
 
 // 3. Basic Algorithm Scripting: Repeat a String Repeat a String
 
@@ -363,6 +494,7 @@ function swowSimpleNumbers() {
 
 
 //  HOISTING
+
 //1. Ініціалізація
 // lexical envirement = { fn: say, a: undefined} - функція читається, змінна undefined (var i = 3 - теж undefined) читається (піднімається) тільки var i
 // 2. Присвоєння
