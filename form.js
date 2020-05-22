@@ -1,6 +1,146 @@
+//HOMEWORK 6
+//Form
+var loginForm = document.getElementById('form');
+var emailInput = document.querySelector('[type = text]');
+var passwordInput = document.querySelector('[type=password]');
+var validationForEmail = document.getElementById('validateEmail');
+var validationForPassword = document.getElementById('validatePassword');
+var submitButton = loginForm.querySelector('[type = submit]');
+
+validationForEmail.style.color = 'red';
+validationForPassword.style.color = 'red';
+
+submitButton.disabled = true;
+
+function emailInputHandler() {
+  startInputDate = true;
+  if (!event.target.value.includes('@')){
+    validationForEmail.innerText = 'email should contain @ symbol';
+  } else validationForEmail.innerText = '';
+};
+
+function passwordInputHandler() {
+  if (event.target.value.length > 6){
+    validationForPassword.innerText = 'password should be less than 6 symbols';
+  } else validationForPassword.innerText = '';
+
+}
+
+function buttonStatus() {
+  if ((!validationForEmail.innerText.length) && (!validationForPassword.innerText.length) && emailInput.value.length && passwordInput.value.length){
+    submitButton.disabled = false;
+  } else submitButton.disabled = true;
+}
+
+function sendData() {
+  event.preventDefault();
+  console.log('submit');
+}
+
+emailInput.addEventListener('input', emailInputHandler);
+passwordInput.addEventListener('input', passwordInputHandler);
+loginForm.addEventListener('submit', sendData);
+loginForm.addEventListener('input', buttonStatus);
+
+
+//****************** FreeCodeCamp *********************************
+//Basic Algorithm Scripting: Slice and Splice
+//You are given two arrays and an index.
+// Use the array methods slice and splice to copy each element of the first array into the second array, in order.
+// Begin inserting elements at index n of the second array.
+// Return the resulting array. The input arrays should remain the same after the function runs.
+
+function frankenSplice(arr1, arr2, n) {
+  var arr2Copy = arr2.slice();
+  arr2Copy.splice(n, 0,  arr1);
+  return arr2Copy.flat();
+}
+// console.log(frankenSplice([1, 2], ["a", "b"], 1));
+
+
+//Basic Algorithm Scripting: Falsy Bouncer
+//Remove all falsy values from an array.
+// Falsy values in JavaScript are false, null, 0, "", undefined, and NaN.
+
+function bouncer(arr) {
+  var newArr = [];
+  arr.map(function(value) {
+    if (Boolean(value) != false) {
+      newArr.push(value);
+    }
+  });
+  return newArr;
+}
+// console.log( bouncer([7, "ate", null, "", false, 9]));
+
+//Basic Algorithm Scripting: Where do I Belong
+// Return the lowest index at which a value (second argument) should be inserted into an array (first argument) once it has been sorted.
+// The returned value should be a number.
+
+function getIndexToIns(arr, num) {
+  arr.push(num).sort(function(a, b) { return a - b; });
+  arr.sort(function(a, b) { return a - b; });
+  return  arr.indexOf(num);
+}
+
+// console.log( getIndexToIns([40, 60, 1, 4], 50));
+
+function mutation(arr) {
+  var arrNew0 = arr[0].toLowerCase().split('');
+  var arrNew1 = arr[1].toLowerCase().split('');
+  var endValue = true;
+  arrNew1.map(function (value) {
+    if (!arrNew0.includes(value)){
+      endValue = false;
+    }
+  });
+  return endValue;
+}
+// console.log(mutation(["hello", "Hello"]));
+
+//Basic Algorithm Scripting: Chunky Monkey
+// Write a function that splits an array (first argument) into groups the length of size (second argument)
+// and returns them as a two-dimensional array.
+
+function chunkArrayInGroups(arr, size) {
+  var newArr = [];
+  var i = 0;
+
+  while (i < arr.length) {
+    newArr.push(arr.slice(i, i + size));
+    i += size;
+  }
+  return newArr;
+}
+// console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2));
+
+//****************************** END **************************************************************************************
+
+// var button = document.getElementById(('clickButton'));
+// function result () {
+//   console.log(this.innerText);
+//   button.innerText = 'john'
+//
+// }
+// button.addEventListener('click', result);
+// button.removeEventListener('click', result);
 //Homework 5
 
 //find the longest word (string)
+function findLongestWordLength(str) {
+  // 4.2
+  var arr =  str.split(' ').map(function (value) {
+
+  });
+  str = str.split(' ');
+  str.sort(function (a, b) {
+    return b.length - a.length;
+  });
+  str.length = str.shift().length;
+
+  return str.length;
+}
+// console.log(findLongestWordLength("The quick brown fox jumped over the lazy dog"));
 
 function findLongestWordLength(str) {
   var i;
@@ -119,7 +259,7 @@ var result = arr.reduce(function(sum, current) {
   return sum + current;
 }, 5);
 
-console.log( result ); // 15
+// console.log( result ); // 15
 //
 function flat(arr) {
   var arrNew = [];
@@ -139,21 +279,21 @@ function flat(arr) {
 // console.log(flat([5, 8, [3, 4, [5, 6]]]));
 //
 
-function flat (arr) {
-  var newArr = [];
-  for (var i = 0; i < arr.length; i++) {
-    if (Array.isArray(arr[i])) {
-      var value = flat(arr[i]);
-      value.forEach(function(value)
-      { newArr.push(value); })
-    } else {
-      newArr.push(arr[i]);
-    }
-  }
-  return newArr;
-}
-
-console.log( flat([[1, 2], 3, [4, [[5]]]]));
+// function flat (arr) {
+//   var newArr = [];
+//   for (var i = 0; i < arr.length; i++) {
+//     if (Array.isArray(arr[i])) {
+//       var value = flat(arr[i]);
+//       value.forEach(function(value)
+//       { newArr.push(value); })
+//     } else {
+//       newArr.push(arr[i]);
+//     }
+//   }
+//   return newArr;
+// }
+//
+// console.log( flat([[1, 2], 3, [4, [[5]]]]));
 
 
 // function alignArr(arr) {
@@ -202,17 +342,17 @@ factorialize(5);
 //4. Basic Algorithm Scripting: Find the Longest Word in a String
 
 // function findLongestWordLength(str) {
-  // 4.2
-  // var arr =  str.split(' ').map(function (value) {
-  //
-  // });
-  //   str = str.split(' ');
-  //   str.sort(function (a, b) {
-  //     return b.length - a.length;
-  //   });
-  //   str.length = str.shift().length;
-  //
-  // return str.length;
+//   4.2
+//   var arr =  str.split(' ').map(function (value) {
+//
+//   });
+//     str = str.split(' ');
+//     str.sort(function (a, b) {
+//       return b.length - a.length;
+//     });
+//     str.length = str.shift().length;
+//
+//   return str.length;
 // }
 // findLongestWordLength("The quick brown fox jumped over the lazy dog");
 
