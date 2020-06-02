@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="weather__body">
+<main  class="">
+  <h1 class="weather__title">Weather in <span id = 'your-city'>your city</span></h1>
+  <div class="weather__content">
+    <div id = "current-weather-details">
+      <ul class="">
+        <li>Humidity: <span id = 'current-humidity'></span></li>
+        <li>Temperature: <span id = 'current-temperature'></span></li>
+        <li>Pressure: <span id = 'current-pressure'></span></li>
+        <li>Wind speed: <span id = 'current-wind-speed'></span></li>
+      </ul>
+      <p>Genaral: <span id = 'current-weather-summary'></span></p>
+      <button class="button" id ='get-weather' onclick= "getCurrentWeather()">Get current weather</button>
+      <input type="text" id="city" placeholder="Enter the city" class="input weather__input">
+      <button class="button button--secondary" id ='get-current-weather' onclick= "getCityWeather()">Get city weather</button>
+      </div>
+  </div>
+
+</main>
+
+<script src="weather.js"></script>
+</body>
+</html>

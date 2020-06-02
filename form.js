@@ -63,27 +63,23 @@ function frankenSplice(arr1, arr2, n) {
 // Falsy values in JavaScript are false, null, 0, "", undefined, and NaN.
 
 function bouncer(arr) {
-  var newArr = [];
-  arr.map(function(value) {
-    if (Boolean(value) != false) {
-      newArr.push(value);
-    }
+  return arr.filter(function (value) {
+    return Boolean(value) != false;
   });
-  return newArr;
 }
-// console.log( bouncer([7, "ate", null, "", false, 9]));
+console.log( bouncer([7, "ate", null, "", false, 9]));
 
 //Basic Algorithm Scripting: Where do I Belong
 // Return the lowest index at which a value (second argument) should be inserted into an array (first argument) once it has been sorted.
 // The returned value should be a number.
 
 function getIndexToIns(arr, num) {
-  arr.push(num).sort(function(a, b) { return a - b; });
+  arr.push(num);
   arr.sort(function(a, b) { return a - b; });
   return  arr.indexOf(num);
 }
 
-// console.log( getIndexToIns([40, 60, 1, 4], 50));
+console.log( getIndexToIns([40, 60, 1, 4], 50));
 
 function mutation(arr) {
   var arrNew0 = arr[0].toLowerCase().split('');
@@ -124,6 +120,8 @@ function chunkArrayInGroups(arr, size) {
 // }
 // button.addEventListener('click', result);
 // button.removeEventListener('click', result);
+
+
 //Homework 5
 
 //find the longest word (string)
